@@ -16,7 +16,7 @@ public class ChinnaHomeAccountSaveOrderApplication {
         int userId = 803461;
         String userPwd = "a3fe2c0b846d21cef58f06284c57f276";
         String orderSecPassword = "902fbdd2b1df0c4f70b4a5d23525e932";
-        int orderQuantity = 6000;
+        int orderQuantity = 10000;
 
         String previousCoin = "";
 

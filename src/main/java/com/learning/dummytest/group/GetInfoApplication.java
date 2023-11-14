@@ -7,7 +7,9 @@ import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 public class GetInfoApplication {
@@ -23,8 +25,14 @@ public class GetInfoApplication {
         userIDs.add(120711);
         userIDs.add(821637);
         userIDs.add(739689);
+        userIDs.add(226416);
+        userIDs.add(803461);
+        userIDs.add(198534);
+        userIDs.add(971337);
+        userIDs.add(127395);
 
-        ArrayList<String> usersInfoResponse = new ArrayList<>();
+        ArrayList<Info> usersInfoResponse = new ArrayList<>();
+        Map<Integer, String> usersBalance = new HashMap<>();
 
         for (Integer userId : userIDs) {
             int langId = 1;
@@ -47,11 +55,26 @@ public class GetInfoApplication {
             );
             ResponseEntity<Info> response
                 = restTemplate.postForEntity(getInfoURL, null, Info.class);
-            usersInfoResponse.add("userId:"+userId + ", Status:" + response.getBody().Status + ", Balance:" + response.getBody().Balance);
+            usersInfoResponse.add(response.getBody());
+            usersBalance.put(userId, response.getBody().Balance);
+
+            Thread.sleep(5 * 1000);
         }
 
-        for (String userInfoResponse : usersInfoResponse) {
-            System.out.println(userInfoResponse);
+        /*for (Info userInfoResponse : usersInfoResponse) {
+            if (userInfoResponse != null && userInfoResponse.List != null) {
+                String balance = userInfoResponse.Balance;
+                if (userInfoResponse != null)
+                    for (Transaction transaction : userInfoResponse.List) {
+                        if (transaction.actionType == 1) {
+                            System.out.println(transaction.userId + "," + balance + "," + transaction.addTime + "," + transaction.Status + "," + transaction.Quantity);
+                        }
+                    }
+            }
+        }*/
+
+        for (Map.Entry<Integer, String> userBalance: usersBalance.entrySet()) {
+            System.out.println(userBalance.getKey() + ": " + userBalance.getValue());
         }
     }
 }
