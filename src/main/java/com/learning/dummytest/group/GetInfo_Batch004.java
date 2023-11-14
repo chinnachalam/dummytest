@@ -12,24 +12,16 @@ import java.util.List;
 import java.util.Map;
 
 
-public class GetInfoApplication {
+public class GetInfo_Batch004 {
 
 
     public static void main(String[] args) throws NoSuchAlgorithmException, InterruptedException {
         List<Integer> userIDs = new ArrayList<>();
-       /* userIDs.add(953257);
-        userIDs.add(987204);
-        userIDs.add(812029);
-        userIDs.add(736588);
-        userIDs.add(607072);
-        userIDs.add(120711);
-        userIDs.add(821637);
-        userIDs.add(739689);
-        userIDs.add(226416);
-        userIDs.add(803461);
-        userIDs.add(198534);*/
-        userIDs.add(971337);
-        //userIDs.add(127395);
+        userIDs.add(813880);
+        userIDs.add(817299);
+        userIDs.add(487212);
+        userIDs.add(700314);
+        userIDs.add(473523);
 
         ArrayList<Info> usersInfoResponse = new ArrayList<>();
         Map<Integer, String> usersBalance = new HashMap<>();

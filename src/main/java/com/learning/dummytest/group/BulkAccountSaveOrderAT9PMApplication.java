@@ -10,6 +10,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 
@@ -18,10 +19,6 @@ public class BulkAccountSaveOrderAT9PMApplication {
     public static void main(String[] args) throws NoSuchAlgorithmException, InterruptedException {
 
         Map<Integer, String> userDetails = new HashMap<>();
-        userDetails.put(953257, "8631888510");
-        userDetails.put(987204, "8631888511");
-        userDetails.put(812029, "8631888509");
-        userDetails.put(736588, "8631688509");
 
         userDetails.put(226416, "test@12345");
         userDetails.put(803461, "test@12345");
@@ -30,10 +27,17 @@ public class BulkAccountSaveOrderAT9PMApplication {
 
         userDetails.put(971337, "sangeetha@13");
 
+        userDetails.put(953257, "8631888510");
+        userDetails.put(987204, "8631888511");
+        userDetails.put(812029, "8631888509");
+        userDetails.put(736588, "8631688509");
+
+
+        List<Integer> successIds = new ArrayList<>();
 
         String orderSecPassword = "902fbdd2b1df0c4f70b4a5d23525e932";
-        int resultChannel = 4;//TODO
-        String coin = "20231113420"; // TODO
+        int resultChannel = 2;//TODO
+        String coin = "20231114420"; // TODO
         long timestamp = System.currentTimeMillis();
 
         BulkAccountSaveOrderAT9PMApplication bulkAccountSaveOrderApplication = new BulkAccountSaveOrderAT9PMApplication();
@@ -41,6 +45,7 @@ public class BulkAccountSaveOrderAT9PMApplication {
 
 
         ArrayList<String> responseData = new ArrayList<>();
+
         for (Map.Entry<Integer, String> userDetail : userDetails.entrySet()) {
             int userId = userDetail.getKey();
             String userPwd = bulkAccountSaveOrderApplication.getMD5(userDetail.getValue());
@@ -58,7 +63,13 @@ public class BulkAccountSaveOrderAT9PMApplication {
             ResponseEntity<Info> getInfoResponse
                 = restTemplate.postForEntity(getInfoURL, null, Info.class);
 
-            long orderQuantity = Math.round(Double.valueOf(getInfoResponse.getBody().Balance) / 100)*15;
+            if (getInfoResponse == null || getInfoResponse.getBody() == null || getInfoResponse.getBody().Balance == null) {
+                continue;
+            }
+
+            long orderQuantity = Math.round((Double.valueOf(getInfoResponse.getBody().Balance) * 15) / 100);
+
+            System.out.println(getInfoResponse.getBody().Balance + ":" + orderQuantity);
 
             String plaintext = String.format("coin=%s&langId=1&order_SecrityPwd=%s&order_expiryTime=1&order_index=%d&order_quantity=%d&order_updown=1&timestamp=%d&userId=%d&userPwd=%s&key=19076bcd2fba4a1e2c5aba0b7497e06e",
                 coin, orderSecPassword, resultChannel, orderQuantity, timestamp, userId, userPwd);
@@ -69,10 +80,10 @@ public class BulkAccountSaveOrderAT9PMApplication {
                 coin, userId, userPwd, resultChannel, orderQuantity, orderSecPassword, timestamp, sign
             );
 
-            /*ResponseEntity<String> response
+            ResponseEntity<String> response
                 = restTemplate.postForEntity(orderSaveUrl, null, String.class);
             responseData.add(userId + ":" + response.getBody());
-            Thread.sleep(2 * 1000);*/
+            Thread.sleep(2 * 1000);
         }
 
         for (String response : responseData) {

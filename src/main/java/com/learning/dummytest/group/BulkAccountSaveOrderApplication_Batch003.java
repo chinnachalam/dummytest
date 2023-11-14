@@ -13,20 +13,21 @@ import java.util.HashMap;
 import java.util.Map;
 
 
-public class BulkAccountSaveOrderApplication01 {
+public class BulkAccountSaveOrderApplication_Batch003 {
 
     public static void main(String[] args) throws NoSuchAlgorithmException, InterruptedException {
 
         Map<Integer, String> userDetails = new HashMap<>();
-        userDetails.put(607072, "7785617458");
-        // userDetails.put(120711, "9568745623");
-        userDetails.put(821637, "9491356241");
-        userDetails.put(739689, "7785296321");
+        userDetails.put(885500, "8569235471");
+        userDetails.put(521428, "6235845628");
+        userDetails.put(584330, "9818586312");
+        userDetails.put(127125, "9465897451");
+        userDetails.put(882786, "9701589647");
 
-        int orderQuantity = 4000;
+        int orderQuantity = 500;
         String orderSecPassword = "902fbdd2b1df0c4f70b4a5d23525e932";
 
-        BulkAccountSaveOrderApplication01 bulkAccountSaveOrderApplication = new BulkAccountSaveOrderApplication01();
+        BulkAccountSaveOrderApplication_Batch003 bulkAccountSaveOrderApplication = new BulkAccountSaveOrderApplication_Batch003();
 
 
         String previousCoin = "";
