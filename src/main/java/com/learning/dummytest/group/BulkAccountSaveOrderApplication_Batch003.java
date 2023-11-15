@@ -19,12 +19,12 @@ public class BulkAccountSaveOrderApplication_Batch003 {
 
         Map<Integer, String> userDetails = new HashMap<>();
         userDetails.put(885500, "8569235471");
-        userDetails.put(521428, "6235845628");
+        /*userDetails.put(521428, "6235845628");
         userDetails.put(584330, "9818586312");
         userDetails.put(127125, "9465897451");
-        userDetails.put(882786, "9701589647");
+        userDetails.put(882786, "9701589647");*/
 
-        int orderQuantity = 500;
+        int orderQuantity = 1000;
         String orderSecPassword = "902fbdd2b1df0c4f70b4a5d23525e932";
 
         BulkAccountSaveOrderApplication_Batch003 bulkAccountSaveOrderApplication = new BulkAccountSaveOrderApplication_Batch003();

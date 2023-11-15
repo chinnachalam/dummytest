@@ -12,12 +12,12 @@ import java.util.List;
 import java.util.Map;
 
 
-public class GetInfoApplication {
+public class GetInfoApplicationTemp {
 
 
     public static void main(String[] args) throws NoSuchAlgorithmException, InterruptedException {
         List<Integer> userIDs = new ArrayList<>();
-        userIDs.add(953257);
+       /* userIDs.add(953257);
         userIDs.add(987204);
         userIDs.add(812029);
         userIDs.add(736588);
@@ -27,11 +27,26 @@ public class GetInfoApplication {
         userIDs.add(739689);
         userIDs.add(226416);
         userIDs.add(803461);
-        userIDs.add(198534);
-        userIDs.add(971337);
-        userIDs.add(127395);
+        userIDs.add(198534);*/
+        // userIDs.add(971337);
+        userIDs.add(973259);
+        userIDs.add(650581);
+        userIDs.add(639430);
+        userIDs.add(918707);
+        userIDs.add(473523);
+        userIDs.add(885500);
+        userIDs.add(521428);
+        userIDs.add(584330);
+        userIDs.add(127125);
+        userIDs.add(127125);
+        userIDs.add(813880);
+        userIDs.add(817299);
+        userIDs.add(487212);
+        userIDs.add(700314);
+        userIDs.add(473523);
+        //userIDs.add(127395);
 
-        ArrayList<Info> usersInfoResponse = new ArrayList<>();
+        ArrayList<String> usersInfoResponse = new ArrayList<>();
         Map<Integer, String> usersBalance = new HashMap<>();
 
         for (Integer userId : userIDs) {
@@ -53,28 +68,16 @@ public class GetInfoApplication {
                 "https://api.amlvip-in.com/api/Assets/getInfo?userId=%d&langId=%d&timestamp=%d&sign=%s",
                 userId, langId, timestamp, sign
             );
-            ResponseEntity<Info> response
-                = restTemplate.postForEntity(getInfoURL, null, Info.class);
+            ResponseEntity<String> response
+                = restTemplate.postForEntity(getInfoURL, null, String.class);
             usersInfoResponse.add(response.getBody());
-            usersBalance.put(userId, response.getBody().Balance);
 
             Thread.sleep(5 * 1000);
         }
 
-        /*for (Info userInfoResponse : usersInfoResponse) {
-            if (userInfoResponse != null && userInfoResponse.List != null) {
-                String balance = userInfoResponse.Balance;
-                if (userInfoResponse != null)
-                    for (Transaction transaction : userInfoResponse.List) {
-                        if (transaction.actionType == 1) {
-                            System.out.println(transaction.userId + "," + balance + "," + transaction.addTime + "," + transaction.Status + "," + transaction.Quantity);
-                        }
-                    }
-            }
-        }*/
-
-        for (Map.Entry<Integer, String> userBalance : usersBalance.entrySet()) {
-            System.out.println(userBalance.getKey() + ": " + userBalance.getValue());
+        for (String userResponse : usersInfoResponse) {
+            System.out.println(userResponse);
         }
+
     }
 }
