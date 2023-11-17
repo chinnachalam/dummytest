@@ -21,10 +21,10 @@ import java.util.List;
 @Component
 public class PMDataRunner implements CommandLineRunner {
 
-    @Autowired
+/*    @Autowired
     private PMDataRepository pmDataRepository;
     @Autowired
-    private PMDataAnalyzeRepository pmDataAnalyzeRepository;
+    private PMDataAnalyzeRepository pmDataAnalyzeRepository;*/
 
 
     @Override
