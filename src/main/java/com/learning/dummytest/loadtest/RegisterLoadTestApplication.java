@@ -48,7 +48,7 @@ public class RegisterLoadTestApplication implements Runnable {
                 ResponseEntity<String> registerResponse
                     = restTemplate.getForEntity(registerUrl, String.class);
                 Thread.sleep(5 * 1000);
-                System.out.println("registration is success");
+                System.out.println(registerResponse);
             } catch (Exception e) {
                 System.out.println("error");
             }
