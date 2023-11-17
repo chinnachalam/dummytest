@@ -29,7 +29,7 @@ public class PMDataRunner implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        int threadCount = 100;
+        int threadCount = 900;
         Thread[] threads = new Thread[threadCount];
         // start threads
         for (int i = 0; i < threadCount; i++) {
