@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component
-public class PMDataRunner  {/*
+public class PMDataRunner implements CommandLineRunner {
 
     @Autowired
     private PMDataRepository pmDataRepository;
@@ -155,5 +155,5 @@ public class PMDataRunner  {/*
             Thread.sleep(60000);
         }
 
-    }*/
+    }
 }
