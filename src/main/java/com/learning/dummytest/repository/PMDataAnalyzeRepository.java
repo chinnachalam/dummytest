@@ -1,8 +1,8 @@
 package com.learning.dummytest.repository;
 
-import com.learning.dummytest.model.PMdata;
-import com.learning.dummytest.model.PMdataAnalize;
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Component;
 
-public interface PMDataAnalyzeRepository extends JpaRepository<PMdataAnalize, Long> {
+@Component
+public interface PMDataAnalyzeRepository{} /*extends JpaRepository<PMdataAnalize, Long> {
 }
+*/
