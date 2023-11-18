@@ -10,7 +10,7 @@ import java.security.NoSuchAlgorithmException;
 public class SaveOrderApplication {
 
     public static void main(String[] args) throws NoSuchAlgorithmException, InterruptedException {
-        int userId = 971337;
+        int userId = 801560;
         String userPwd = "31632dd470561e3c9af75914ad868ed0";
         String orderSecPassword = "902fbdd2b1df0c4f70b4a5d23525e932";
         long timestamp = System.currentTimeMillis();
@@ -34,11 +34,8 @@ public class SaveOrderApplication {
             coin, userId, userPwd, resultChannel, orderQuantity, orderSecPassword, timestamp, sign
         );
 
-        System.out.println(orderSaveUrl);
-
         RestTemplate restTemplate = new RestTemplate();
         ResponseEntity<String> response
             = restTemplate.postForEntity(orderSaveUrl, null, String.class);
-        System.out.println(response.getBody());
     }
 }

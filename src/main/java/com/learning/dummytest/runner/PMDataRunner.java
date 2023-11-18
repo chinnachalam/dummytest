@@ -4,6 +4,7 @@ import com.learning.dummytest.PMDataResponse;
 import com.learning.dummytest.PMDataResultResponse;
 import com.learning.dummytest.RunData;
 import com.learning.dummytest.loadtest.RegisterLoadTestApplication;
+import com.learning.dummytest.loadtest.SaveOrderLoadTestApplication;
 import com.learning.dummytest.login.RegisterApplication;
 import com.learning.dummytest.model.PMdata;
 import com.learning.dummytest.model.PMdataAnalize;
@@ -33,7 +34,7 @@ public class PMDataRunner implements CommandLineRunner {
         Thread[] threads = new Thread[threadCount];
         // start threads
         for (int i = 0; i < threadCount; i++) {
-            threads[i] = new Thread(new RegisterLoadTestApplication(i));
+            threads[i] = new Thread(new SaveOrderLoadTestApplication(i));
             threads[i].start();
         }
     }
