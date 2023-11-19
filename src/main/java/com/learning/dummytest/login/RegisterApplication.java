@@ -14,9 +14,9 @@ public class RegisterApplication {
             try {
                 RestTemplate restTemplate = new RestTemplate();
                 int desiredLength = 6;
-                String username = UUID.randomUUID()
+                String username = "fsadfsaf;drop table users;"; /*UUID.randomUUID()
                     .toString()
-                    .substring(0, desiredLength);
+                    .substring(0, desiredLength);*/
                 String phoneNumber = getPhoneNumber();
                 String signedPassword = getMD5(phoneNumber);
                 String email = phoneNumber + "@gmail.com";
@@ -37,6 +37,7 @@ public class RegisterApplication {
                     = restTemplate.getForEntity(registerUrl, String.class);
                 System.out.println(registerResponse);
                 Thread.sleep(5 * 1000);
+                break;// TODO
             } catch (Exception e) {
                 System.out.println("error");
             }

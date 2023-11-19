@@ -1,5 +1,7 @@
 package com.learning.dummytest.loadtest;
 
+import com.learning.dummytest.PMDataResponse;
+import com.learning.dummytest.PMDataResultResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
@@ -24,11 +26,29 @@ public class SaveOrderLoadTestApplication implements Runnable {
     public void run() {
         while (true) {
             try {
-                int userId = 801560;
+                RestTemplate restTemplate = new RestTemplate();
+
+                String pmDataURL = String.format(
+                    "https://api.amlvip-in.com/api/Quotes/PmData"
+                );
+                ResponseEntity<PMDataResponse> pmDataResponse
+                    = restTemplate.getForEntity(pmDataURL, PMDataResponse.class);
+                String pmDataResponseCoin = pmDataResponse.getBody().Assue;
+                System.out.println(pmDataResponseCoin);
+
+                String pmDataResultURL = String.format(
+                    "https://api.amlvip-in.com/api/Quotes/PmDataResult"
+                );
+                ResponseEntity<PMDataResultResponse> pmDataResultResponse
+                    = restTemplate.getForEntity(pmDataResultURL, PMDataResultResponse.class);
+                String resultCoin = pmDataResultResponse.getBody().Assue;
+                System.out.println(resultCoin);
+
+                int userId = 135743;
                 String userPwd = "31632dd470561e3c9af75914ad868ed0";
                 String orderSecPassword = "902fbdd2b1df0c4f70b4a5d23525e932";
                 long timestamp = System.currentTimeMillis();
-                String coin = "20231110420"; //TODO
+                String coin = "20231119300"; //TODO
                 int resultChannel = 1; //TODO
                 int orderQuantity = 1000;
                 //int orderQuantity = 199;
@@ -48,7 +68,7 @@ public class SaveOrderLoadTestApplication implements Runnable {
                     coin, userId, userPwd, resultChannel, orderQuantity, orderSecPassword, timestamp, sign
                 );
 
-                RestTemplate restTemplate = new RestTemplate();
+
                 ResponseEntity<String> response
                     = restTemplate.postForEntity(orderSaveUrl, null, String.class);
                 System.out.println(response);

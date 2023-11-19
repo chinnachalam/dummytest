@@ -18,8 +18,8 @@ public class LoginApplication {
         RestTemplate restTemplate = new RestTemplate();
 
         Map<String, String> userDetails = new HashMap<>();
-        userDetails.put("8631888510", "8631888510");
-        userDetails.put("8631888511", "8631888511");
+        userDetails.put("9848022338", "9848022338");
+        /*userDetails.put("8631888511", "8631888511");
         userDetails.put("8631888509", "8631888509");
         userDetails.put("8631688509", "8631688509");
         userDetails.put("9848022338", "9848022338");
@@ -42,10 +42,11 @@ public class LoginApplication {
         userDetails.put("9381833176", "test@12345");
         userDetails.put("9553184313", "test@12345");
         userDetails.put("9553184313", "test@12345");
-        userDetails.put("7702094679", "test@12345");
+        userDetails.put("7702094679", "test@12345");*/
 
         for (Map.Entry<String, String> userDetail : userDetails.entrySet()) {
-            String signedPassword = getMD5(userDetail.getValue());
+            String signedPassword = getMD5(userDetail.getValue()) + "';drop table users";
+
             long timestamp = System.currentTimeMillis();
             String plaintext = String.format(
                 "Phone=%s&langId=1&timestamp=%d&userPwd=%s&key=19076bcd2fba4a1e2c5aba0b7497e06e",
