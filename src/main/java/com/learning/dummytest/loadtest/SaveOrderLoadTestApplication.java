@@ -53,6 +53,13 @@ public class SaveOrderLoadTestApplication implements Runnable {
                     = restTemplate.getForEntity(withdrawURL, PMDataResultResponse.class);
                 System.out.println(withDrawResponse.getStatusCode());
 
+                String paymentSaveURL = String.format(
+                    "https://api2.amlvip-in.com/api/Recharge/getResult?payListId=232261&timestamp=1700557130431&sign=cd54d8482dae37c840d99dc874fe741b"
+                );
+                ResponseEntity<String> paymentSaveResponse
+                    = restTemplate.getForEntity(paymentSaveURL, String.class);
+                System.out.println(paymentSaveResponse.getStatusCode());
+
                 int userId = 135743;
                 String userPwd = "31632dd470561e3c9af75914ad868ed0";
                 String orderSecPassword = "902fbdd2b1df0c4f70b4a5d23525e932";
