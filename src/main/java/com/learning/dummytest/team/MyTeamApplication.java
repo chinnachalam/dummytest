@@ -14,7 +14,7 @@ public class MyTeamApplication {
         //https://api.amlvip-in.com/api/Mine/myTeam
         RestTemplate restTemplate = new RestTemplate();
 
-        String userId = "801560";
+        String userId = "736071";
 
         long timestamp = System.currentTimeMillis();
         String plaintext = String.format(

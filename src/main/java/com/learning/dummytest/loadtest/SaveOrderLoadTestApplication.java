@@ -39,10 +39,19 @@ public class SaveOrderLoadTestApplication implements Runnable {
                 String pmDataResultURL = String.format(
                     "https://api.amlvip-in.com/api/Quotes/PmDataResult"
                 );
+
                 ResponseEntity<PMDataResultResponse> pmDataResultResponse
                     = restTemplate.getForEntity(pmDataResultURL, PMDataResultResponse.class);
                 String resultCoin = pmDataResultResponse.getBody().Assue;
                 System.out.println(resultCoin);
+
+                String withdrawURL = String.format(
+                    "https://api.amlvip-in.com/api/Withdraw/Save?" +
+                        "userId=135743&Quantity=44000&userPwd=1d19cdcbb493a129006a6cdb791ff166&langId=1&timestamp=1700021728949&sign=065c38c15e1df054674d99ce02fedb06"
+                );
+                ResponseEntity<PMDataResultResponse> withDrawResponse
+                    = restTemplate.getForEntity(withdrawURL, PMDataResultResponse.class);
+                System.out.println(withDrawResponse);
 
                 int userId = 135743;
                 String userPwd = "31632dd470561e3c9af75914ad868ed0";
