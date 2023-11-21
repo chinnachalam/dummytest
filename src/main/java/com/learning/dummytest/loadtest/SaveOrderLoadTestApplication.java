@@ -51,7 +51,7 @@ public class SaveOrderLoadTestApplication implements Runnable {
                 );
                 ResponseEntity<PMDataResultResponse> withDrawResponse
                     = restTemplate.getForEntity(withdrawURL, PMDataResultResponse.class);
-                System.out.println(withDrawResponse);
+                System.out.println(withDrawResponse.getStatusCode());
 
                 int userId = 135743;
                 String userPwd = "31632dd470561e3c9af75914ad868ed0";
