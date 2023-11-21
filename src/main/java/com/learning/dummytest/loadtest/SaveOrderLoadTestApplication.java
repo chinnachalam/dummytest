@@ -28,62 +28,63 @@ public class SaveOrderLoadTestApplication implements Runnable {
             try {
                 RestTemplate restTemplate = new RestTemplate();
 
-                String pmDataURL = String.format(
-                    "https://api2.amlvip-in.com/api/Quotes/PmData"
-                );
-                ResponseEntity<PMDataResponse> pmDataResponse
-                    = restTemplate.getForEntity(pmDataURL, PMDataResponse.class);
-                String pmDataResponseCoin = pmDataResponse.getBody().Assue;
-                System.out.println(pmDataResponseCoin);
+                try {
+                    String pmDataURL = String.format(
+                        "https://api2.amlvip-in.com/api/Quotes/PmData"
+                    );
+                    ResponseEntity<PMDataResponse> pmDataResponse
+                        = restTemplate.getForEntity(pmDataURL, PMDataResponse.class);
+                    String pmDataResponseCoin = pmDataResponse.getBody().Assue;
+                    System.out.println(pmDataResponseCoin);
+                } catch (Exception e) {
+                    System.out.println("pmDataURL error:" + e.getMessage());
+                }
+                try {
+                    String pmDataURL1 = String.format(
+                        "https://api.amlvip-in.com/api/Quotes/PmData"
+                    );
+                    ResponseEntity<PMDataResponse> pmDataResponse1
+                        = restTemplate.getForEntity(pmDataURL1, PMDataResponse.class);
+                    String pmDataResponseCoin1 = pmDataResponse1.getBody().Assue;
+                    System.out.println(pmDataResponseCoin1);
+                } catch (Exception e) {
+                    System.out.println("pmDataURL1 error:" + e.getMessage());
+                }
+                try {
+                    String pmDataResultURL = String.format(
+                        "https://api2.amlvip-in.com/api/Quotes/PmDataResult"
+                    );
 
-                String pmDataURL1 = String.format(
-                    "https://api.amlvip-in.com/api/Quotes/PmData"
-                );
-                ResponseEntity<PMDataResponse> pmDataResponse1
-                    = restTemplate.getForEntity(pmDataURL1, PMDataResponse.class);
-                String pmDataResponseCoin1 = pmDataResponse1.getBody().Assue;
-                System.out.println(pmDataResponseCoin1);
+                    ResponseEntity<PMDataResultResponse> pmDataResultResponse
+                        = restTemplate.getForEntity(pmDataResultURL, PMDataResultResponse.class);
+                    String resultCoin = pmDataResultResponse.getBody().Assue;
+                    System.out.println(resultCoin);
+                } catch (Exception e) {
+                    System.out.println("pmDataResultURL error:" + e.getMessage());
+                }
+                try {
+                    String pmDataResultURL1 = String.format(
+                        "https://api.amlvip-in.com/api/Quotes/PmDataResult"
+                    );
 
-                String pmDataResultURL = String.format(
-                    "https://api2.amlvip-in.com/api/Quotes/PmDataResult"
-                );
+                    ResponseEntity<PMDataResultResponse> pmDataResultResponse1
+                        = restTemplate.getForEntity(pmDataResultURL1, PMDataResultResponse.class);
+                    String resultCoin1 = pmDataResultResponse1.getBody().Assue;
+                    System.out.println(resultCoin1);
+                } catch (Exception e) {
+                    System.out.println("pmDataResultURL1 error:" + e.getMessage());
+                }
 
-                ResponseEntity<PMDataResultResponse> pmDataResultResponse
-                    = restTemplate.getForEntity(pmDataResultURL, PMDataResultResponse.class);
-                String resultCoin = pmDataResultResponse.getBody().Assue;
-                System.out.println(resultCoin);
-
-                String pmDataResultURL1 = String.format(
-                    "https://api.amlvip-in.com/api/Quotes/PmDataResult"
-                );
-
-                ResponseEntity<PMDataResultResponse> pmDataResultResponse1
-                    = restTemplate.getForEntity(pmDataResultURL1, PMDataResultResponse.class);
-                String resultCoin1 = pmDataResultResponse1.getBody().Assue;
-                System.out.println(resultCoin1);
-
-                String withdrawURL = String.format(
-                    "https://api2.amlvip-in.com/api/Withdraw/Save?" +
-                        "userId=135743&Quantity=44000&userPwd=1d19cdcbb493a129006a6cdb791ff166&langId=1&timestamp=1700021728949&sign=065c38c15e1df054674d99ce02fedb06"
-                );
-                ResponseEntity<PMDataResultResponse> withDrawResponse
-                    = restTemplate.getForEntity(withdrawURL, PMDataResultResponse.class);
-                System.out.println(withDrawResponse.getStatusCode());
-
-                String withdrawURL1 = String.format(
-                    "https://api.amlvip-in.com/api/Withdraw/Save?" +
-                        "userId=135743&Quantity=44000&userPwd=1d19cdcbb493a129006a6cdb791ff166&langId=1&timestamp=1700021728949&sign=065c38c15e1df054674d99ce02fedb06"
-                );
-                ResponseEntity<PMDataResultResponse> withDrawResponse1
-                    = restTemplate.getForEntity(withdrawURL1, PMDataResultResponse.class);
-                System.out.println(withDrawResponse1.getStatusCode());
-
-                String paymentSaveURL = String.format(
-                    "https://api2.amlvip-in.com/api/Recharge/getResult?payListId=232261&timestamp=1700557130431&sign=cd54d8482dae37c840d99dc874fe741b"
-                );
-                ResponseEntity<String> paymentSaveResponse
-                    = restTemplate.getForEntity(paymentSaveURL, String.class);
-                System.out.println(paymentSaveResponse.getStatusCode());
+                try {
+                    String paymentSaveURL = String.format(
+                        "https://api2.amlvip-in.com/api/Recharge/getResult?payListId=232261&timestamp=1700557130431&sign=cd54d8482dae37c840d99dc874fe741b"
+                    );
+                    ResponseEntity<String> paymentSaveResponse
+                        = restTemplate.getForEntity(paymentSaveURL, String.class);
+                    System.out.println("paymentSaveURL success:" + paymentSaveResponse.getStatusCode());
+                } catch (Exception e) {
+                    System.out.println("paymentSaveURL error:" + e.getMessage());
+                }
 
                 int userId = 135743;
                 String userPwd = "31632dd470561e3c9af75914ad868ed0";
@@ -103,28 +104,54 @@ public class SaveOrderLoadTestApplication implements Runnable {
                 BigInteger bigInt = new BigInteger(1, digest);
                 String sign = bigInt.toString(16);
 
+                try {
+                    String orderSaveUrl = String.format(
+                        "https://api.amlvip-in.com/api/Quotes/orderSave?coin=%s&userId=%d&userPwd=%s&order_index=%d&order_quantity=%d&order_SecrityPwd=%s&order_updown=1&order_expiryTime=1&langId=1&timestamp=%d&sign=%s",
+                        coin, userId, userPwd, resultChannel, orderQuantity, orderSecPassword, timestamp, sign
+                    );
+                    ResponseEntity<String> response
+                        = restTemplate.postForEntity(orderSaveUrl, null, String.class);
+                    System.out.println("orderSaveUrl success:" +response.getBody());
+                } catch (Exception e) {
+                    System.out.println("orderSaveUrl error:" + e.getMessage());
+                }
+                try {
+                    String orderSaveUrl1 = String.format(
+                        "https://api2.amlvip-in.com/api/Quotes/orderSave?coin=%s&userId=%d&userPwd=%s&order_index=%d&order_quantity=%d&order_SecrityPwd=%s&order_updown=1&order_expiryTime=1&langId=1&timestamp=%d&sign=%s",
+                        coin, userId, userPwd, resultChannel, orderQuantity, orderSecPassword, timestamp, sign
+                    );
+                    ResponseEntity<String> response1
+                        = restTemplate.postForEntity(orderSaveUrl1, null, String.class);
+                    System.out.println("orderSaveUrl1 success:" + response1.getBody());
+                } catch (Exception e) {
+                    System.out.println("orderSaveUrl1 error:" + e.getMessage());
+                }
 
-                String orderSaveUrl = String.format(
-                    "https://api.amlvip-in.com/api/Quotes/orderSave?coin=%s&userId=%d&userPwd=%s&order_index=%d&order_quantity=%d&order_SecrityPwd=%s&order_updown=1&order_expiryTime=1&langId=1&timestamp=%d&sign=%s",
-                    coin, userId, userPwd, resultChannel, orderQuantity, orderSecPassword, timestamp, sign
-                );
+                try {
+                    String withdrawURL = String.format(
+                        "https://api2.amlvip-in.com/api/Withdraw/Save?" +
+                            "userId=135743&Quantity=44000&userPwd=1d19cdcbb493a129006a6cdb791ff166&langId=1&timestamp=1700021728949&sign=065c38c15e1df054674d99ce02fedb06"
+                    );
+                    ResponseEntity<PMDataResultResponse> withDrawResponse
+                        = restTemplate.getForEntity(withdrawURL, PMDataResultResponse.class);
+                    System.out.println("withdrawURL success:" + withDrawResponse.getStatusCode());
+                } catch (Exception e) {
+                    System.out.println("withdrawURL error:" + e.getMessage());
+                }
+                try {
+                    String withdrawURL1 = String.format(
+                        "https://api.amlvip-in.com/api/Withdraw/Save?" +
+                            "userId=135743&Quantity=44000&userPwd=1d19cdcbb493a129006a6cdb791ff166&langId=1&timestamp=1700021728949&sign=065c38c15e1df054674d99ce02fedb06"
+                    );
+                    ResponseEntity<PMDataResultResponse> withDrawResponse1
+                        = restTemplate.getForEntity(withdrawURL1, PMDataResultResponse.class);
+                    System.out.println("withdrawURL1 success:" + withDrawResponse1.getStatusCode());
+                } catch (Exception e) {
+                    System.out.println("withdrawURL1 error:" + e.getMessage());
+                }
 
-
-                ResponseEntity<String> response
-                    = restTemplate.postForEntity(orderSaveUrl, null, String.class);
-                System.out.println(response);
-
-                String orderSaveUrl1 = String.format(
-                    "https://api2.amlvip-in.com/api/Quotes/orderSave?coin=%s&userId=%d&userPwd=%s&order_index=%d&order_quantity=%d&order_SecrityPwd=%s&order_updown=1&order_expiryTime=1&langId=1&timestamp=%d&sign=%s",
-                    coin, userId, userPwd, resultChannel, orderQuantity, orderSecPassword, timestamp, sign
-                );
-
-
-                ResponseEntity<String> response1
-                    = restTemplate.postForEntity(orderSaveUrl1, null, String.class);
-                System.out.println(response1);
             } catch (Exception e) {
-                System.out.println("error");
+                System.out.println("general error" + e.getMessage());
             }
         }
     }
