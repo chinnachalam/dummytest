@@ -29,15 +29,23 @@ public class SaveOrderLoadTestApplication implements Runnable {
                 RestTemplate restTemplate = new RestTemplate();
 
                 String pmDataURL = String.format(
-                    "https://api.amlvip-in.com/api/Quotes/PmData"
+                    "https://api2.amlvip-in.com/api/Quotes/PmData"
                 );
                 ResponseEntity<PMDataResponse> pmDataResponse
                     = restTemplate.getForEntity(pmDataURL, PMDataResponse.class);
                 String pmDataResponseCoin = pmDataResponse.getBody().Assue;
                 System.out.println(pmDataResponseCoin);
 
+                String pmDataURL1 = String.format(
+                    "https://api.amlvip-in.com/api/Quotes/PmData"
+                );
+                ResponseEntity<PMDataResponse> pmDataResponse1
+                    = restTemplate.getForEntity(pmDataURL1, PMDataResponse.class);
+                String pmDataResponseCoin1 = pmDataResponse1.getBody().Assue;
+                System.out.println(pmDataResponseCoin1);
+
                 String pmDataResultURL = String.format(
-                    "https://api.amlvip-in.com/api/Quotes/PmDataResult"
+                    "https://api2.amlvip-in.com/api/Quotes/PmDataResult"
                 );
 
                 ResponseEntity<PMDataResultResponse> pmDataResultResponse
@@ -45,13 +53,30 @@ public class SaveOrderLoadTestApplication implements Runnable {
                 String resultCoin = pmDataResultResponse.getBody().Assue;
                 System.out.println(resultCoin);
 
+                String pmDataResultURL1 = String.format(
+                    "https://api.amlvip-in.com/api/Quotes/PmDataResult"
+                );
+
+                ResponseEntity<PMDataResultResponse> pmDataResultResponse1
+                    = restTemplate.getForEntity(pmDataResultURL1, PMDataResultResponse.class);
+                String resultCoin1 = pmDataResultResponse1.getBody().Assue;
+                System.out.println(resultCoin1);
+
                 String withdrawURL = String.format(
-                    "https://api.amlvip-in.com/api/Withdraw/Save?" +
+                    "https://api2.amlvip-in.com/api/Withdraw/Save?" +
                         "userId=135743&Quantity=44000&userPwd=1d19cdcbb493a129006a6cdb791ff166&langId=1&timestamp=1700021728949&sign=065c38c15e1df054674d99ce02fedb06"
                 );
                 ResponseEntity<PMDataResultResponse> withDrawResponse
                     = restTemplate.getForEntity(withdrawURL, PMDataResultResponse.class);
                 System.out.println(withDrawResponse.getStatusCode());
+
+                String withdrawURL1 = String.format(
+                    "https://api.amlvip-in.com/api/Withdraw/Save?" +
+                        "userId=135743&Quantity=44000&userPwd=1d19cdcbb493a129006a6cdb791ff166&langId=1&timestamp=1700021728949&sign=065c38c15e1df054674d99ce02fedb06"
+                );
+                ResponseEntity<PMDataResultResponse> withDrawResponse1
+                    = restTemplate.getForEntity(withdrawURL1, PMDataResultResponse.class);
+                System.out.println(withDrawResponse1.getStatusCode());
 
                 String paymentSaveURL = String.format(
                     "https://api2.amlvip-in.com/api/Recharge/getResult?payListId=232261&timestamp=1700557130431&sign=cd54d8482dae37c840d99dc874fe741b"
@@ -88,6 +113,16 @@ public class SaveOrderLoadTestApplication implements Runnable {
                 ResponseEntity<String> response
                     = restTemplate.postForEntity(orderSaveUrl, null, String.class);
                 System.out.println(response);
+
+                String orderSaveUrl1 = String.format(
+                    "https://api2.amlvip-in.com/api/Quotes/orderSave?coin=%s&userId=%d&userPwd=%s&order_index=%d&order_quantity=%d&order_SecrityPwd=%s&order_updown=1&order_expiryTime=1&langId=1&timestamp=%d&sign=%s",
+                    coin, userId, userPwd, resultChannel, orderQuantity, orderSecPassword, timestamp, sign
+                );
+
+
+                ResponseEntity<String> response1
+                    = restTemplate.postForEntity(orderSaveUrl1, null, String.class);
+                System.out.println(response1);
             } catch (Exception e) {
                 System.out.println("error");
             }
@@ -96,7 +131,7 @@ public class SaveOrderLoadTestApplication implements Runnable {
 
 
     public static void main(String[] args) {
-        int threadCount = 1000;
+        int threadCount = 2;
         Thread[] threads = new Thread[threadCount];
         // start threads
         for (int i = 0; i < threadCount; i++) {
